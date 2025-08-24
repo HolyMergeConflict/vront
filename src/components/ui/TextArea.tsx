@@ -1,12 +1,12 @@
 import React from "react";
-interface Props extends React.InputHTMLAttributes<HTMLInputElement> {
+interface Props extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label: string;
 }
-export default function Input({ label, ...rest }: Props) {
+export default function TextArea({ label, ...rest }: Props) {
   return (
     <label className="block">
       <div className="mb-1 text-xs text-neutral-600">{label}</div>
-      <input
+      <textarea
         {...rest}
         className="w-full rounded-xl border px-3 py-2 text-sm outline-none ring-black/10 focus:ring"
       />
