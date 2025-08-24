@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Reveal, containerStagger, fadeUp } from "../utils/motion";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   const features = [
@@ -39,25 +39,21 @@ export default function HomePage() {
       >
         <div className="max-w-3xl">
           <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
-            reco syste — платформа задач с рекомендациями
+            reco system — платформа задач с рекомендациями
           </h1>
           <p className="mt-3 text-neutral-600 text-base md:text-lg">
             Этот проект объединяет банк задач, модерацию, историю решений и
             основу для рекомендательной системы. Бэкэнд — FastAPI, БД —
             SQLAlchemy (async), роли и пайплайн модерации уже реализованы.
           </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+
+          {/* CTA: переход в личный кабинет */}
+          <div className="mt-6">
             <Link
-              to="/tasks"
-              className="rounded-xl bg-black px-4 py-2 text-white text-sm"
+              to="/me"
+              className="inline-block rounded-xl bg-black px-4 py-2 text-sm text-white hover:opacity-90"
             >
-              Перейти к задачам
-            </Link>
-            <Link
-              to="/task-history"
-              className="rounded-xl border px-4 py-2 text-sm hover:bg-neutral-100"
-            >
-              Моя история
+              В личный кабинет
             </Link>
           </div>
         </div>
@@ -85,7 +81,6 @@ export default function HomePage() {
         <h2 className="text-lg font-medium">Как пользоваться</h2>
         <ol className="mt-2 list-decimal pl-5 text-sm text-neutral-700 space-y-1">
           <li>Залогиньтесь или зарегистрируйтесь.</li>
-          <li>Откройте раздел «Задачи» — создавайте и управляйте контентом.</li>
           <li>
             Если у вас права модератора — проверяйте новые задачи в «Модерации».
           </li>

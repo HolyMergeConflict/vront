@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import SimpleTable from "../components/tables/SimpleTable";
 import useApi from "../hooks/useApi";
 import api from "../services/apiClient";
@@ -9,15 +9,21 @@ export default function UsersPage() {
   const { run, loading, error, data } = useApi<UserPublic[]>(() =>
     api.get(endpoints.users),
   );
+
+  const didInit = useRef(false);
   useEffect(() => {
+    if (didInit.current) return;
+    didInit.current = true;
     run();
   }, [run]);
+
   const columns = [
     { key: "id", title: "ID" },
     { key: "email", title: "Email" },
     { key: "username", title: "Username" },
     { key: "role", title: "Роль" },
   ];
+
   return (
     <section>
       <div className="mb-4 flex items-center justify-between">

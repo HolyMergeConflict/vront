@@ -12,6 +12,7 @@ import TasksPage from "./pages/TasksPage";
 import TaskHistoryPage from "./pages/TaskHistoryPage";
 import UsersPage from "./pages/UsersPage";
 import ModerationPage from "./pages/ModerationPage";
+import MePage from "./pages/MePage";
 
 export default function App() {
   const location = useLocation();
@@ -89,6 +90,14 @@ export default function App() {
                     <ModerationPage />
                   </PageTransition>
                 </Protected>
+              }
+            />
+            <Route
+              path="/me"
+              element={
+                <PageTransition>
+                  <MePage />
+                </PageTransition>
               }
             />
 
