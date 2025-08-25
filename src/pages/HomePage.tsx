@@ -1,92 +1,150 @@
-import { motion } from "framer-motion";
-import { Reveal, containerStagger, fadeUp } from "../utils/motion";
+import React from "react";
 import { Link } from "react-router-dom";
+import { motion, useReducedMotion } from "framer-motion";
+import {
+  Shield,
+  History,
+  Users,
+  Sparkles,
+  CheckCircle2,
+  Book,
+  Cpu,
+} from "lucide-react";
+import SectionCard from "../components/home/SectionCard";
+import Roadmap, { RoadmapItem } from "../components/home/Roadmap";
+
+const ROADMAP: RoadmapItem[] = [
+  {
+    id: "mvp",
+    title: "MVP backend: задачи, модерация, история",
+    period: "Q3 2025",
+    status: "done",
+    points: ["Планирование и написание backend"],
+  },
+  {
+    id: "frontend",
+    title: "Написание frontend",
+    period: "Q4 2025",
+    status: "in-progress",
+    points: ["Разработка и тестирование интерфейса", "Интеграция с backend"],
+  },
+  {
+    id: "recs",
+    title: "Рекомендательная система v1",
+    period: "ВЧЕРА",
+    status: "planned",
+    points: ["Миша сделай модель пж пж пж"],
+  },
+  {
+    id: "integration",
+    title: "Интеграция backend с моделью",
+    period: "ВЧЕРА",
+    status: "planned",
+    points: ["Миша, очень надо"],
+  },
+];
 
 export default function HomePage() {
-  const features = [
-    {
-      title: "Задачи",
-      text: "Создание, редактирование и удаление задач. Поля: заголовок, описание, ответ, сложность, предмет.",
-    },
-    {
-      title: "Модерация",
-      text: "Новые задачи проверяет модератор → статус (APPROVED/REJECTED).",
-    },
-    {
-      title: "История решений",
-      text: "Сохраняем ответы, статусы, баллы и фидбек.",
-    },
-    {
-      title: "Пользователи и роли",
-      text: "Админ, модератор, студент. Доступ по ролям.",
-    },
-    {
-      title: "API FastAPI",
-      text: "Маршруты: /auth, /users, /tasks, /task-history, /moderation.",
-    },
-    {
-      title: "Рекомендации",
-      text: "Дальше — модель, предлагающая похожие задачи.",
-    },
-  ];
+  const prefersReduced = useReducedMotion();
+
+  const ACCENT = "#10B981";
 
   return (
-    <section className="space-y-10">
-      {/* Hero */}
-      <Reveal
+    <section
+      className="mx-auto w-full max-w-5xl px-4 space-y-10"
+      style={{ ["--accent" as any]: ACCENT }}
+    >
+      {/* HERO */}
+      <motion.div
+        initial={prefersReduced ? {} : { opacity: 0, y: 16 }}
+        animate={prefersReduced ? {} : { opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
         className="rounded-3xl border bg-white p-8 md:p-12 shadow-sm"
-        variants={fadeUp}
       >
         <div className="max-w-3xl">
           <h1 className="text-3xl md:text-4xl font-semibold tracking-tight">
-            reco system — платформа задач с рекомендациями
+            reco syste — платформа задач с рекомендациями
           </h1>
           <p className="mt-3 text-neutral-600 text-base md:text-lg">
-            Этот проект объединяет банк задач, модерацию, историю решений и
-            основу для рекомендательной системы. Бэкэнд — FastAPI, БД —
-            SQLAlchemy (async), роли и пайплайн модерации уже реализованы.
+            Банк задач, модерация, история решений и база для рекомендательной
+            системы. Бэкенд — FastAPI, БД — SQLAlchemy (async), роли и пайплайн
+            модерации уже готовы.
           </p>
-
-          {/* CTA: переход в личный кабинет */}
-          <div className="mt-6">
+          <div className="mt-6 flex flex-wrap gap-3">
             <Link
-              to="/me"
-              className="inline-block rounded-xl bg-black px-4 py-2 text-sm text-white hover:opacity-90"
+              to="/tasks"
+              className="rounded-xl bg-black px-4 py-2 text-white text-sm"
             >
-              В личный кабинет
+              Перейти к задачам
+            </Link>
+            <Link
+              to="/task-history"
+              className="rounded-xl border px-4 py-2 text-sm hover:bg-neutral-100"
+            >
+              Моя история
             </Link>
           </div>
         </div>
-      </Reveal>
+      </motion.div>
 
-      {/* Features */}
-      <Reveal variants={containerStagger}>
-        <div className="grid gap-4 md:grid-cols-3">
-          {features.map((f, i) => (
-            <motion.div
-              key={i}
-              className="rounded-2xl border bg-white p-5 shadow-sm"
-              variants={fadeUp}
-            >
-              <div className="text-sm text-neutral-500">Функция</div>
-              <div className="mt-1 text-lg font-medium">{f.title}</div>
-              <p className="mt-1 text-sm text-neutral-600">{f.text}</p>
-            </motion.div>
-          ))}
-        </div>
-      </Reveal>
+      <SectionCard
+        icon={<Book size={16} />}
+        subtitle="раздел"
+        title="Задачи"
+        bullets={[
+          "Быстрый поиск",
+          "Черновики",
+          "Статусы: APPROVED/REJECTED/PENDING",
+        ]}
+        cta={{ to: "/tasks", label: "Открыть задачи" }}
+        delay={0.05}
+        accentParts={["icon"]}
+      />
 
-      {/* How to */}
-      <Reveal className="rounded-2xl border bg-white p-6">
-        <h2 className="text-lg font-medium">Как пользоваться</h2>
-        <ol className="mt-2 list-decimal pl-5 text-sm text-neutral-700 space-y-1">
-          <li>Залогиньтесь или зарегистрируйтесь.</li>
-          <li>
-            Если у вас права модератора — проверяйте новые задачи в «Модерации».
-          </li>
-          <li>Смотрите «Историю решений» для анализа прогресса.</li>
-        </ol>
-      </Reveal>
+      <SectionCard
+        icon={<Shield size={16} />}
+        subtitle="процесс"
+        title="Модерация контента"
+        bullets={[
+          "Очередь на проверку",
+          "Комментарий модератора",
+          "Аудит действий",
+        ]}
+        cta={{ to: "/moderation", label: "К модерации" }}
+        delay={0.1}
+        accentParts={["icon"]}
+      />
+
+      <SectionCard
+        icon={<History size={16} />}
+        subtitle="аналитика"
+        title="История решений"
+        bullets={["Статус, балл и время", "Фильтры по статусу и датам"]}
+        cta={{ to: "/task-history", label: "Смотреть историю" }}
+        delay={0.15}
+        accentParts={["icon"]}
+      />
+
+      <SectionCard
+        icon={<Users size={16} />}
+        subtitle="доступ"
+        title="Пользователи и роли"
+        bullets={["Админ, модератор, студент", "Доступ зависит от роли"]}
+        delay={0.2}
+        accentParts={["icon"]}
+      />
+
+      <SectionCard
+        icon={<Cpu size={16} />}
+        subtitle="скоро"
+        title="Рекомендации"
+        bullets={["Похожие задачи после ошибок", "Адаптивная сложность"]}
+        cta={{ to: "/tasks", label: "Скоро" }}
+        delay={0.25}
+        accentParts={["icon"]}
+      />
+
+      <Roadmap items={ROADMAP} accent="#10B981" className="mt-10" />
     </section>
   );
 }
