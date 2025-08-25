@@ -1,5 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
     color-scheme: light;
+    overflow-x: clip;
 }
 body {
     font-family:
@@ -11,4 +16,15 @@ body {
         Roboto,
         "Helvetica Neue",
         Arial;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+:focus {
+    outline-offset: 2px;
+    outline-width: 2px;
 }

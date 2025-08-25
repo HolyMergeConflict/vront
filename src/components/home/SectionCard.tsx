@@ -32,7 +32,7 @@ export default function SectionCard({
     : "bg-black text-white";
 
   const iconWrapCls = useIconAccent
-    ? "bg-[var(--accent)]/15 text-[var(--accent)] ring-1 ring-[var(--accent)]/30"
+    ? "bg-[var(--accent)]/15 text-[var(--accent)] ring-1 ring-black/10"
     : "bg-black/5 text-black ring-1 ring-black/10";
 
   const ctaCls = useCtaAccent

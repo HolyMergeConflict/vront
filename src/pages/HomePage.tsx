@@ -51,7 +51,7 @@ export default function HomePage() {
 
   return (
     <section
-      className="mx-auto w-full max-w-5xl px-4 space-y-10"
+      className="mx-auto w-full max-w-5xl px-4 space-y-10 overflow-x-clip"
       style={{ ["--accent" as any]: ACCENT }}
     >
       {/* HERO */}

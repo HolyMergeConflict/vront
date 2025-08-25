@@ -29,7 +29,7 @@ export default function Roadmap({
 
   return (
     <section
-      className={`mx-auto w-full max-w-5xl ${className}`}
+      className={`mx-auto w-full max-w-5xl ${className} overflow-x-clip`}
       style={{ ["--accent" as any]: accent }}
     >
       <header className="mb-6 md:mb-8">

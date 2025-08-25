@@ -18,7 +18,7 @@ export default function Header() {
     .join("");
 
   return (
-    <header className="sticky top-0 z-10 border-b bg-white/80 backdrop-blur dark:bg-neutral-900/70 dark:border-neutral-800">
+    <header className="sticky top-0 z-10 border-b bg-white/80 backdrop-blur dark:bg-neutral-900/70 dark:border-neutral-800 overflow-x-clip">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2">
         <Link to="/" className="font-semibold tracking-tight">
           reco system
